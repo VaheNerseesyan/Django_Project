@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .thumbnail {
+            width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Lesson List</h1>
+        <a href="{% url 'lesson_create' %}" class="btn btn-primary mb-4">Add New Lesson</a>
+        <div class="row">
+            {% for lesson in lessons %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if lesson.image %}
+                            <img src="{{ lesson.image.url }}" class="card-img-top thumbnail" alt="{{ lesson.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/200" class="card-img-top thumbnail" alt="Placeholder Image">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'lesson_detail' lesson.pk %}" class="text-dark">{{ lesson.title }}</a></h5>
+                            <a href="{% url 'lesson_update' lesson.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{% url 'lesson_delete' lesson.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
